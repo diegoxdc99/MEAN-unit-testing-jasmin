@@ -99,11 +99,14 @@ describe("Testing Router", () => {
         description: 'Diegos test',
         percentage: 0,
         tags: [],
-        assets: []
+        assets: [{
+          url: 'http://diego.com'
+        }]
       };
 
       const response = await axios.post("http://localhost:3000/api", _pins);
       expect(response.status).toBe(200);
+      expect(requestPromise.get).toHaveBeenCalledBefore(Pins.create);
     });
 
     it("should return 500 error database", async () => {
@@ -160,6 +163,7 @@ describe("Testing Router", () => {
       spyOn(Pins, "create").and.callFake((id, callBack) => {
         callBack(false, id);
       });
+      spyOn(requestPromise, 'get').and.callThrough();
 
       const _pins = {
         title: 'Diego',
@@ -174,6 +178,7 @@ describe("Testing Router", () => {
       try {
         const response = await axios.post("http://localhost:3000/api", _pins);
         expect(response.status).toBe(200);
+        expect(requestPromise.get).not.toHaveBeenCalled();
       } catch (error) {
 
       }
