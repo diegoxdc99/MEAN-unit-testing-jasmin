@@ -1,20 +1,19 @@
-const Jasmine = require('jasmine')
-const JasmineConsoleReporter = require('jasmine-console-reporter');
+const Jasmine = require("jasmine");
+const JasmineConsoleReporter = require("jasmine-console-reporter");
 
-const jasmine = new Jasmine()
-jasmine.loadConfigFile('spec/support/jasmine.json')
-
+const jasmine = new Jasmine();
+jasmine.loadConfigFile("spec/support/jasmine.json");
 const jasmineConsoleReporter = new JasmineConsoleReporter({
-    colors: 1,
-    cleanStack: 1,
-    verbosity: 4,
-    listStyle: 'indent',
-    timeUnit: 'ms',
-    timeThreshold: { ok: 500, warn: 1000, ouch: 3000 },
-    activity: false,
-    emoji: true,
-    beep: true
+  colors: 1, // (0|false)|(1|true)|2
+  cleanStack: 1, // (0|false)|(1|true)|2|3
+  verbosity: 4, // (0|false)|1|2|(3|true)|4|Object
+  listStyle: "indent", // "flat"|"indent"
+  timeUnit: "ms", // "ms"|"ns"|"s"
+  timeThreshold: { ok: 500, warn: 1000, ouch: 3000 }, // Object|Number
+  activity: false, // boolean or string ("dots"|"star"|"flip"|"bouncingBar"|...)
+  emoji: true,
+  beep: true
 });
-
+jasmine.seed(44925);
 jasmine.addReporter(jasmineConsoleReporter);
 jasmine.execute();

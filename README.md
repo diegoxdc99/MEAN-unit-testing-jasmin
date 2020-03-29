@@ -1,27 +1,68 @@
-# Pin
+# MEAN-unit-testing-jasmin
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.3.
+Repositorio de practica para el curso de Unit Testing para MEAN con Jasmine
 
-## Development server
+# Análisis de código estatico
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+```
+npm install eslint --save
+eslint --init
+```
 
-## Code scaffolding
+# Prettier
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Para formatear el código
 
-## Build
+https://prettier.io/
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Al instalar el plugin en VS code se debe de activar la opción de formatear al guardar en settings
 
-## Running unit tests
+# Metodos mas usados para los espias
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+¿Cómo se crea un espía?
 
-## Running end-to-end tests
+```javascript
+spyOn(obj, "method"); // obj.method es una función
+```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+¿Cómo verificar que un método fue llamado?
 
-## Further help
+```javascript
+const ref = spyOn(obj, "method");
+expect(ref).toHaveBeenCalled();
+// O directamente
+expect(obj.method).toHaveBeenCalled();
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+¿Cómo verificar que un método fue llamado con un parámetro específico?
+
+```javascript
+const ref = spyOn(obj, "method");
+expect(ref).toHaveBeenCalledWith("foo", "bar");
+// O directamente
+expect(obj.method).toHaveBeenCalledWith("foo", "bar");
+```
+
+¿Cómo puedo verificar el número exacto de ejecuciones de un método?
+
+```javascript
+expect(obj.method.callCount).toBe(2);
+```
+
+¿Cómo espiar en un método sin modificar su comportamiento?
+
+```javascript
+spyOn(obj, "method").andCallThrough();
+```
+
+¿Cómo puedo cambiar el valor retornado por un método?
+
+```javascript
+spyOn(obj, "method").andReturn("value");
+```
+
+¿Cómo puedo sobreescribir un método?
+
+```javascript
+spyOn(obj, "method").andCallFake(() => "this is a function");
+```
