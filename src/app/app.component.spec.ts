@@ -4,7 +4,7 @@ import { AppComponent } from './app.component';
 import { By } from '@angular/platform-browser';
 import { RouterOutlet } from '@angular/router';
 
-fdescribe('AppComponent', () => {
+describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
   let component: AppComponent;
   beforeEach(async(() => {
